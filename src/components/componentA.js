@@ -1,44 +1,31 @@
-import React from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { actionType } from "../redux/action";
+import { fetchUsers } from "../api";
 
-function ComponentA(props) {
+function ComponentA() {
   const nilai = useSelector((state) => state.nilai);
   const dispatch = useDispatch();
 
-  //versi kalau kita mau masukkan di function lagi
-  // const getMinusData = () => {
-  //   return props.handleMinus();
-  // };
+  const getData = async () => {
+    try {
+      await dispatch(fetchUsers());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
-      <div>
-        <button onClick={() => dispatch({ type: actionType.ADD_DATA })}>
-          Klik Tambah {nilai}
-        </button>
-        <button onClick={() => dispatch({ type: actionType.MINUS_DATA })}>
-          Klik Kurang {nilai}
-        </button>
-      </div>
-      {/* <div>
-        <input onChange={handleChange} value={props.id} />
-        <button>search</button>
-      </div> */}
+      <button onClick={() => dispatch({ type: actionType.ADD_DATA })}>
+        Klik Tambah {nilai}
+      </button>
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   console.log("state", state);
-//   return state;
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     handlePlus: () => dispatch({ type: actionType.ADD_DATA }),
-//     handleMinus: () => dispatch({ type: actionType.MINUS_DATA }),
-//   };
-// };
 
 export default ComponentA;

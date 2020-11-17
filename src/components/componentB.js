@@ -1,19 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import _ from "lodash";
+import { useSelector, useDispatch } from "react-redux";
+import { actionType } from "../redux/action";
 
-function componentB(props) {
+function ComponentB() {
+  const nilai = useSelector((state) => state.nilai);
+  const dispatch = useDispatch();
   return (
     <div>
-      <div>Nilai sekarang</div>
-      <div>nilai: {props.nilai}</div>
-      <div>Id User: {_.get(props.users, "data.id")}</div>
+      <button onClick={() => dispatch({ type: actionType.MINUS_DATA })}>
+        Klik Kurang {nilai}
+      </button>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-export default connect(mapStateToProps)(componentB);
+export default ComponentB;

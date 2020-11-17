@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ComponentA from "./components/componentA";
 import ComponentB from "./components/componentB";
+import ComponentC from "./components/componentC";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -15,6 +16,7 @@ function App() {
         </div>
         <ComponentA />
         <ComponentB />
+        <ComponentC />
       </div>
     </Provider>
   );

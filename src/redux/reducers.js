@@ -21,6 +21,11 @@ export const rootReducer = (state = globalState, action) => {
         users: action.payload,
         error: "",
       };
+    case actionType.FETCH_USERS_ERROR:
+      return {
+        ...state,
+        error: "error api...",
+      };
     case actionType.ONCHANGE_ID:
       return {
         ...state,
